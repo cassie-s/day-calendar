@@ -30,12 +30,10 @@ textarea{
 }
 
 .time-block{
-  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   border-top: 1px solid black;
-  /* border-bottom: 1px solid black; */
 }
 
 
@@ -68,10 +66,6 @@ textarea{
   color: white;
 }
 
-button i {
-display: inline-block;
-width: 100%;
-}
 
 .saveBtn {
   border-left: 1px solid black;
@@ -79,6 +73,12 @@ width: 100%;
   border-bottom-right-radius: 15px;
   background-color: #06AED5;
   color: white;
+  padding: 5px;
+}
+
+.saveBtn i {
+  display: inline-block;
+  width: 100%;
 }
 
 .saveBtn i:hover {
