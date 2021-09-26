@@ -49,7 +49,8 @@ setInterval(checkTime(), (1000 * 60) * 5);
 
 //when the save button is clicked, text is saved in local storage//
 var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-var saveTasks = function() {
+
+$('#saveBtn').on('click', function() {
     localStorage.setItem("tasks", JSON.stringify(tasks);
 };
 
