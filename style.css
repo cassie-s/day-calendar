@@ -33,22 +33,25 @@ textarea{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid black;
+  height: 100%;
 }
 
+.textarea {
+  height: 100%;
+}
 
 .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;;
-
 }
 
 .hour {
+  padding-top: 30px;
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
-  border-right: 1px solid black;
+  height: 80%;
 }
 
 .past {
@@ -68,12 +71,16 @@ textarea{
 
 
 .saveBtn {
-  border-left: 1px solid black;
+  border-left: 1.5px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
   background-color: #06AED5;
   color: white;
-  padding: 5px;
+  height: 100%;
+  /* padding: 5px; */
 }
 
 .saveBtn i {
