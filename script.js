@@ -15,9 +15,9 @@ updateTime();
 var checkTime = function () {
 
     //Get Current time
-    var currentTime = moment().format('H');
+    var currentTime = moment();
 
-    //get all elements with class "taskarea"
+    //get all elements with class "textarea"
     var timeBlockElements = $(".textarea");
 
     //loop through taskarea classes
@@ -50,7 +50,10 @@ setInterval(checkTime(), (1000 * 60) * 5);
 //when the save button is clicked, text is saved in local storage//
 var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-$('#saveBtn').on('click', function() {
-    localStorage.setItem("tasks", JSON.stringify(tasks);
-};
+$('saveBtn').on('click', function() {
+    var tasks = $("textarea").val();
+    $("textarea").push();
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(localStorage)
+});
 
