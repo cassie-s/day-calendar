@@ -1,3 +1,9 @@
+//___ object
+let currentTasks = {
+
+}
+
+
 //load today's date//
 const clock = document.getElementById('clock');
 
@@ -14,46 +20,73 @@ updateTime();
 //Change textarea background color based on time
 var checkTime = function () {
 
-    //Get Current time
-    var currentTime = moment();
-
-    //get all elements with class "textarea"
-    var timeBlockElements = $(".textarea");
-
-    //loop through taskarea classes
-    for (var i = 0 ; i < timeBlockElements.length ; i++) {
-
-        //Get element i's ID as a string
-        var elementID = timeBlockElements[i].id;
-
-        //get element by ID
-        var manipID = document.getElementById(timeBlockElements[i].id)
-
-        //remove any old classes from element
-        $(timeBlockElements[i].id).removeClass(".present .past .future");
-
-        // apply new class if task is present/past/future
-        if (elementID < currentTime) {
-            $(manipID).addClass("past");
-        } else if (elementID > currentTime) {
-            $(manipID).addClass("future");
-        } else {
-            $(manipID).addClass("present");
+    $(".description").each(function() {
+        var currentTime = parseInt(moment().hour());
+        var timeBlockElements = parseInt($(this).attr("id").replace("div", ""))
+        if (currentTime > timeBlockElements) {
+            $(this).removeClass("present");
+            $(this).addClass("past");
+        } else if (currentTime === timeBlockElements) {
+            $(this).removeClass("future");
+            $(this).addClass("present");
+        } else if (currentTime < timeBlockElements) {
+            $(this).addClass("future");
         }
+    })
+}
+
+checkTime();
+
+
+setInterval(function() {
+    checkTime();
+}, 60000);
+
+var displayTasks = function() {
+    currentTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (!currentTasks) {
+        currentTasks = {
+            9:"",
+            10:"",
+            11:"",
+            12:"",
+            13:"",
+            14:"",
+            15:"",
+            16:"",
+            17:"",
+        };
+    } else {
+        $.each(currentTasks, function(id, text){
+            $("#div" + id).text(text);
+        })
     }
+}
+
+//when the save button is clicked, text is saved in local storage/
+let saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(currentTasks));
 };
 
-// checkTime every 5 minutes
-setInterval(checkTime(), (1000 * 60) * 5);
-
-
-//when the save button is clicked, text is saved in local storage//
 var tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
-$('saveBtn').on('click', function() {
-    var tasks = $("textarea").val();
-    $("textarea").push();
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(localStorage)
+$(".time-block").on('click', ".saveBtn", function() {
+    let id = $(this).attr("id").replace("btn", "")
+    let text = $("#div" + id)
+    let tasktext = text
+        .val()
+        .trim()
+    let divId = $("<div>")
+        .attr("id", "div" + id)
+        .addClass(text.attr("class"))
+        .text(tasktext)
+    text.replaceWith(divId)
+    currentTasks[id] = tasktext
+
+saveTasks();
+    
 });
+
+displayTasks();
+
 
